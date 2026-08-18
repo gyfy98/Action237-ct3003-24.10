@@ -10,15 +10,15 @@
 # See /LICENSE for more information.
 #
 
-name: OpenWrt Builder
+name: passwall(no xray and sing-box)
 
 on:
   repository_dispatch:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/padavanonly/immortalwrt-mt798x-24.10
+  REPO_BRANCH: 2410
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
@@ -65,10 +65,26 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_P1_SH
 
     - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      run: |
+        cd openwrt
+        ./scripts/feeds update -a
 
+        # 更新 golang 1.25 版本
+        rm -rf feeds/packages/lang/golang
+        git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
+    
     - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      run: |
+        cd openwrt
+        ./scripts/feeds install -a 
+
+        # 移除 openwrt feeds 自带的核心库
+        rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
+        git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
+
+        # 移除 openwrt feeds 过时的luci版本
+        rm -rf feeds/luci/applications/luci-app-passwall
+        git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-luci
 
     - name: Load custom configuration
       run: |
