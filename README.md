@@ -1,5 +1,15 @@
+# 为何构建此固件
+恩山论坛237编译的固件，里面较新的23和24两个版本都有不同的缺陷
+- 23版本：
+   1. WireGuard不带qrencode，生成的配置无法扫码很不方便
+   2. ipv6流量统计不了，导致显示的流量使用信息与实际不符
+   3. opkg源有问题（immortalwrt_core用的是`mt7981`，实际没这个包，应为`filogic`）
+- 24版本：修复了ipv6的统计问题，但：
+  1. 自带的homeproxy非常难用，更新慢，还经常莫名奇妙跑满CPU导致整个网络卡死
+  2. opkg源还是有问题
+
 # 说明
-基于[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt) 而来，利用github action在线构建固件。
+基于[237](https://github.com/padavanonly/immortalwrt-mt798x-6.6/tree/2410)的源码，和最新的[passwall](https://github.com/Openwrt-Passwall/openwrt-passwall-packages)软件。利用[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt) 的项目，用`github action`在线构建固件。**固件只有`CT3003`的版本。**
 
 1. 默认ip地址`192.168.6.1`
 2. 包含的插件：
@@ -9,18 +19,13 @@
    - vlmcsd
    - wireguard（带qrencode）
    - zerotier
+     
+本固件基于24.10分支，
+- 删除掉`homeproxy`，换成最新的`passwall`。
+- 直接为`wireguard`添加二维码`qrencode`插件，不用手动安装
+- 修复opkg源的问题。
 
-# 为何构建此固件
-恩山论坛237编译的固件，里面较新的23和24两个版本都有不同的缺陷
-- 23版本：
-   1. WireGuard不带qrencode，生成的配置无法扫码很不方便
-   2. ipv6流量统计不了，导致显示的流量使用信息与实际不符
-   3. opkg源有问题（immortalwrt_core用的是`mt7981`，实际没这个包，修改为`filogic`）
-- 24版本：修复了ipv6的统计问题，但：
-  1. 自带的homeproxy非常难用，更新慢，还经常莫名奇妙跑满CPU导致整个网络卡死
-  2. opkg源还是有问题
-
-  本固件基于24.10分支，目的删除掉homeproxy，换成最新的passwall。同时修复wg没有二维码，opkg源的问题。 目前还在摸索中...
+目前还在摸索中...
 
 # 如何生成config
 须在linux环境，推荐Ubuntu20.04。
