@@ -19,7 +19,7 @@ sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generat
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
 
-# Fix Rust build: preserve upstream *.orig files
+# Fix Rust build: preserve upstream *.orig files,see https://github.com/openwrt/packages/pull/27487
 # 这rust害人不浅，本地编译和github编译都出错。
 python3 - <<'PY'
 from pathlib import Path
