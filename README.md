@@ -3,7 +3,7 @@
 
 1. 默认ip地址`192.168.6.1`
 2. 包含的插件：
-   - passwall
+   - passwall（由于内核更新频繁，故不带内核xray、singbox等等，只包含基础的nft proxy支持）
    - openclash
    - ddns-go
    - vlmcsd
@@ -15,7 +15,7 @@
 - 23版本：
    1. WireGuard不带qrencode，生成的配置无法扫码很不方便
    2. ipv6流量统计不了，导致显示的流量使用信息与实际不符
-   3. opkg源代有问题（immortalwrt_core用的是`mt7981`，实际没这个包，修改为`filogic`）
+   3. opkg源有问题（immortalwrt_core用的是`mt7981`，实际没这个包，修改为`filogic`）
 - 24版本：修复了ipv6的统计问题，但：
   1. 自带的homeproxy非常难用，更新慢，还经常莫名奇妙跑满CPU导致整个网络卡死
   2. opkg源还是有问题
