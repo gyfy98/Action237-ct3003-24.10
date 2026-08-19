@@ -35,6 +35,17 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
+      
+    # =====缓存 apt 包，加快环境初始化速度 =====
+    - name: Cache APT packages
+      uses: actions/cache@v4
+      id: cache-apt
+      with:
+        path: /var/cache/apt/archives
+      # 缓存键：Ubuntu版本 + 软件包列表的哈希值
+        key: apt-${{ runner.os }}-${{ hashFiles('**/apt-packages.txt') }}
+        restore-keys: |
+          apt-${{ runner.os }}-
 
     - name: Initialization environment
       env:
