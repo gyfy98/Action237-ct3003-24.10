@@ -13,7 +13,7 @@
 
 1. 默认ip地址`192.168.6.1`
 2. 包含的插件：
-   - passwall（由于内核更新频繁，故不带内核xray、singbox等等，只包含基础的nft proxy支持）
+   - passwall（由于内核更新频繁，故不带内核xray、singbox等等（可自行在组件更新下载你想要的内核），只包含基础的nft proxy支持以及`luci-app-passwall`本体）
    - openclash
    - ddns-go
    - vlmcsd
