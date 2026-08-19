@@ -1,4 +1,6 @@
 # 说明
+基于https://github.com/P3TERX/Actions-OpenWrt而来。
+
 默认ip地址`192.168.6.1`
 
 # 为何构建此固件
