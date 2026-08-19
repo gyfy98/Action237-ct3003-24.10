@@ -1,7 +1,14 @@
 # 说明
-基于https://github.com/P3TERX/Actions-OpenWrt而来。
+基于[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt) 而来，利用github action在线构建固件。
 
-默认ip地址`192.168.6.1`
+1. 默认ip地址`192.168.6.1`
+2. 包含的插件：
+   - passwall
+   - openclash
+   - ddns-go
+   - vlmcsd
+   - wireguard（带qrencode）
+   - zerotier
 
 # 为何构建此固件
 恩山论坛237编译的固件，里面较新的23和24两个版本都有不同的缺陷
@@ -14,11 +21,5 @@
   2. opkg源还是有问题
 
   本固件基于24.10分支，目的删除掉homeproxy，换成最新的passwall。同时修复wg没有二维码，opkg源的问题。 目前还在摸索中...
-   
-# 插件
-- passwall
-- openclash
-- ddns-go
-- vlmcsd
-- wireguard（带qrencode）
-- zerotier
+
+
