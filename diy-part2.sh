@@ -34,6 +34,7 @@ sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' 
 
 
 # 修复： 包ebtables的hash problem
+# 这个问题在6.6内核的分支是修复的了，不知道为什么，5.4的内核分支没修：https://github.com/padavanonly/immortalwrt-mt798x-6.6/commit/bf62ca2211323fc90b4887849819fcc2bf16b0ae
 # Hash of the downloaded file does not match (file: 3039d73b167c41025b1b401b647743b9c6d786613c693eef34de325b30de6d47, requested: 1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37)
 if grep -q "PKG_MIRROR_HASH:=1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37" package/network/utils/ebtables/Makefile; then
     sed -i 's/PKG_MIRROR_HASH:=1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37/PKG_MIRROR_HASH:=3039d73b167c41025b1b401b647743b9c6d786613c693eef34de325b30de6d47/' package/network/utils/ebtables/Makefile
