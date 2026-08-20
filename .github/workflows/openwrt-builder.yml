@@ -23,7 +23,7 @@ env:
   CONFIG_FILE: default.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
@@ -31,7 +31,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
-
+    permissions:              
+      contents: write         # 授予创建 Release 的权限
+      
     steps:
     - name: Checkout
       uses: actions/checkout@main
