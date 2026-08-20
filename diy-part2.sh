@@ -19,7 +19,7 @@ sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generat
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
 
-# 添加最新的passwall
+# 添加最新的passwall，请根据个人喜好来决定是否添加。
 # 移除 openwrt feeds 自带的核心库
 rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
 git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
@@ -27,12 +27,10 @@ git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/
 rm -rf feeds/luci/applications/luci-app-passwall
 git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-luci
 
-
 # 修复： ERROR: package/feeds/packages/rust [host] failed to build.
 # 根据https://github.com/immortalwrt/packages/issues/1607
 # 注意：只有云编译CI环境需要！！！本地编译无需这个补丁
 sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
-
 
 # 修复： 包ebtables的hash problem
 # 这个问题在6.6内核的分支是修复的了，不知道为什么，5.4的内核分支没修：https://github.com/padavanonly/immortalwrt-mt798x-6.6/commit/bf62ca2211323fc90b4887849819fcc2bf16b0ae
@@ -40,7 +38,6 @@ sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' 
 if grep -q "PKG_MIRROR_HASH:=1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37" package/network/utils/ebtables/Makefile; then
     sed -i 's/PKG_MIRROR_HASH:=1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37/PKG_MIRROR_HASH:=3039d73b167c41025b1b401b647743b9c6d786613c693eef34de325b30de6d47/' package/network/utils/ebtables/Makefile
 fi
-
 
 # 修复：rust问题
 # Fix Rust build: preserve upstream *.orig files,see https://github.com/openwrt/packages/pull/27487
