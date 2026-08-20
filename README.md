@@ -25,7 +25,7 @@
 - 直接为`wireguard`添加二维码`qrencode`插件，不用手动安装
 - 修复opkg源的问题。
 
-目前还在摸索中...
+**目前编译通过，等待刷入验证**
 
 # 如何生成config
 须在linux环境，推荐Ubuntu20.04。
@@ -62,3 +62,6 @@ git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-
 ```
 6. 复制配置文件：`cp -f defconfig/mt7981-ax3000.config .config`
 7. 选择你需要的包：`make menuconfig`，保存后其中的`.config`即所需的文件。
+
+# 本地编译
+  请`make`前，运行`diy-part2.sh`补丁。24.10的5.4内核分支一堆问题。**请详细的看里面的注释！！！**
