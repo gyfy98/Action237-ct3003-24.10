@@ -30,6 +30,7 @@ git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-
 
 # 修复： ERROR: package/feeds/packages/rust [host] failed to build.
 # 根据https://github.com/immortalwrt/packages/issues/1607
+# 注意：只有云编译CI环境需要！！！本地编译无需这个补丁
 sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
 
 
