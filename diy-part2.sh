@@ -19,6 +19,13 @@ sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generat
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
 
+# 修复包ebtables的hash problem
+# Hash of the downloaded file does not match (file: 3039d73b167c41025b1b401b647743b9c6d786613c693eef34de325b30de6d47, requested: 1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37)
+if grep -q "PKG_MIRROR_HASH:=1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37" package/network/utils/ebtables/Makefile; then
+    sed -i 's/PKG_MIRROR_HASH:=1ee560498e1a047b329eab3dad8425ae51e7f0527e4495efb99481ca11206b37/PKG_MIRROR_HASH:=3039d73b167c41025b1b401b647743b9c6d786613c693eef34de325b30de6d47/' package/network/utils/ebtables/Makefile
+fi
+
+
 # Fix Rust build: preserve upstream *.orig files,see https://github.com/openwrt/packages/pull/27487
 # 这rust害人不浅，本地编译和github编译都出错。
 python3 - <<'PY'
