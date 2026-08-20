@@ -89,14 +89,6 @@ jobs:
         cd openwrt
         ./scripts/feeds install -a 
 
-        # 移除 openwrt feeds 自带的核心库
-        rm -rf feeds/packages/net/{xray-core,v2ray-geodata,sing-box,chinadns-ng,dns2socks,hysteria,ipt2socks,microsocks,naiveproxy,shadowsocks-libev,shadowsocks-rust,shadowsocksr-libev,simple-obfs,tcping,trojan-plus,tuic-client,v2ray-plugin,xray-plugin,geoview,shadow-tls}
-        git clone https://github.com/Openwrt-Passwall/openwrt-passwall-packages package/passwall-packages
-
-        # 移除 openwrt feeds 过时的luci版本
-        rm -rf feeds/luci/applications/luci-app-passwall
-        git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-luci
-
         
     - name: Load custom configuration
       run: |
@@ -109,13 +101,9 @@ jobs:
     - name: Download package
       id: package
       run: |
-        cd openwrt        
-        # 修复： ERROR: package/feeds/packages/rust [host] failed to build.
-        # 根据https://github.com/immortalwrt/packages/issues/1607
-        sed -i 's/--set=llvm\.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/' feeds/packages/lang/rust/Makefile
-        
+        cd openwrt              
         make defconfig
-        make download -j8
+        make download -j1
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
         
@@ -124,8 +112,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        # 测试阶段，先单线程、详细日志编译。解决问题后再改回来
-        #make -j$(nproc) || make -j1 || make -j1 V=s
+        make -j$(nproc) || make -j1 || make -j1 V=s
         make -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
