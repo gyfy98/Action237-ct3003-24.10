@@ -10,7 +10,6 @@
 
 # 说明
 基于[237](https://github.com/padavanonly/immortalwrt-mt798x-6.6/tree/2410)的源码，和最新的[passwall](https://github.com/Openwrt-Passwall/openwrt-passwall-packages)软件。利用[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt) 的项目，用`github action`在线构建固件。**固件只有`CT3003`的版本。**
-
 1. 默认ip地址`192.168.6.1`
 2. 包含的插件：
    - passwall（由于内核更新频繁，故不带内核xray、singbox等等（可自行在组件更新下载你想要的内核），只包含基础的nft proxy支持以及`luci-app-passwall`本体）
@@ -19,8 +18,10 @@
    - vlmcsd
    - wireguard（带qrencode）
    - zerotier
+   - qos-mtk
+   - turboacc-mtk
      
-本固件基于24.10分支，
+本固件基于24.10分支，内核版本5.4.284，闭源驱动。
 - 删除掉`homeproxy`，换成最新的`passwall`。
 - 直接为`wireguard`添加二维码`qrencode`插件，不用手动安装
 - 修复opkg源的问题。
@@ -66,3 +67,9 @@ git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-
 # 本地编译
   本地编译请参考其他教程。**注意：请`make`前，运行`diy-part2.sh`补丁，否则无法编译成功**。**请详细的看里面的注释！！！** 
   237的源码`24.10`的`5.4`内核分支一堆问题，编译好几遍终于编译通过了。
+
+# 其他型号？&&自己编译？
+本项目理论适用于其他`mt7981`的设备，只需替换掉默认的`default.config`即可（请看上面的**如何生成config**）。你可以以本项目为模板，更多请参考：[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt
+
+记得设置一下`action`的权限，否则`release`不了：
+settings-actions-Workflow permissions-Read and write permissions
