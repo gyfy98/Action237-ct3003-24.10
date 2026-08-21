@@ -68,7 +68,7 @@ git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-
   237的源码`24.10`的`5.4`内核分支一堆问题，编译好几遍终于编译通过了。
 
 # 其他型号？&&自己编译？
-本项目理论适用于其他`mt7981`的设备，只需替换掉默认的`default.config`即可（请看上面的**如何生成config**）。你可以以本项目为模板，更多请参考：[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt
+本项目理论适用于其他`mt7981`的设备，只需替换掉默认的`default.config`即可（请看上面的**如何生成config**）。你可以以本项目为模板，更多请参考：[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 
 记得设置一下`action`的权限，否则`release`不了：
 settings-actions-Workflow permissions-Read and write permissions
