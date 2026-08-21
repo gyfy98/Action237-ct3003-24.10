@@ -64,10 +64,12 @@ git clone https://github.com/Openwrt-Passwall/openwrt-passwall package/passwall-
 7. 选择你需要的包：`make menuconfig`，保存后其中的`.config`即所需的文件。
 
 # 本地编译
-  本地编译请参考其他教程。**注意：请`make`前，运行`diy-part2.sh`补丁，否则无法编译成功**。**请详细的看里面的注释！！！** 
   237的源码`24.10`的`5.4`内核分支一堆问题，编译好几遍终于编译通过了。
+  
+  **注意：请`make`前，运行`diy-part2.sh`补丁，否则无法编译成功**。**请详细的看里面的注释！！！** 也就是在执行完“如何生成config”的第七步后或者第六步后（推荐）运行补丁，然后再make download和make（更多请自行搜索编译流程）
 
-# 其他型号？&&自己编译？
+
+# 其他型号？&&自己定制云编译？
 本项目理论适用于其他`mt7981`的设备，只需替换掉默认的`default.config`即可（请看上面的**如何生成config**）。你可以以本项目为模板，更多请参考：[P3TERX/Actions-OpenWrt](https://github.com/P3TERX/Actions-OpenWrt)
 
 记得设置一下`action`的权限，否则`release`不了：
