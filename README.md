@@ -17,13 +17,12 @@
    - ddns-go
    - vlmcsd
    - wireguard（带qrencode）
-   - zerotier
-   - qos-mtk
-   - turboacc-mtk
-     
-本固件基于24.10分支，内核版本5.4.284，闭源驱动。
+   - zerotier  
+   - 还有三个与237编译的一样qos-mtk（硬件qos）、turboacc-mtk（硬件加速）、wrtbwmon（流量统计）
+
+本固件基于24.10分支，内核版本5.4.284，闭源驱动，相比237编译出的固件：
 - 删除掉`homeproxy`，换成最新的`passwall`。
-- 直接为`wireguard`添加二维码`qrencode`插件，不用手动安装
+- 直接为`wireguard`添加二维码`qrencode`插件，不用手动安装。
 - 修复opkg源的问题。
 
 **目前已刷入验证。测试中发现的bug请看release说明。**
