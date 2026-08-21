@@ -25,7 +25,7 @@
 - 直接为`wireguard`添加二维码`qrencode`插件，不用手动安装
 - 修复opkg源的问题。
 
-**目前编译通过，等待刷入验证**
+**目前已刷入验证。测试中发现的bug请看release说明。**
 
 # 如何生成config
 须在linux环境，推荐Ubuntu20.04。
