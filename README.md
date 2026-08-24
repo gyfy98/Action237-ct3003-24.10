@@ -26,6 +26,7 @@
 - 修复opkg源的问题。
 
 **目前已刷入验证。测试中发现的bug请看release说明。**
+_6.6内核版本已放弃。很多依赖莫名其妙，比如turboacc依赖ttyd终端；mt7981的芯片强制依赖usb等。且编译后无法启动，怀疑有严重问题，懒得折腾了_
 需要大分区UBOOT。可在[恩山](https://www.right.com.cn/forum/thread-8328967-1-1.html)下载大分区的uboot版本。
 
 # 如何生成config
